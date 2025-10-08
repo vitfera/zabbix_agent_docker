@@ -43,6 +43,14 @@ Este repositório contém uma configuração Docker Compose para executar o Zabb
 
 ## ⚙️ Configuração
 
+### Arquivos de Configuração
+
+O projeto inclui um arquivo de configuração customizado `zabbix_agent2.conf` que:
+- ✅ Resolve problemas de configuração ausente
+- ✅ Inclui parâmetros customizados para Docker
+- ✅ Usa variáveis de ambiente para flexibilidade
+- ✅ Configurações otimizadas para monitoramento de containers
+
 ### Variáveis de Ambiente
 
 | Variável | Descrição | Valor Padrão |
@@ -56,12 +64,20 @@ Este repositório contém uma configuração Docker Compose para executar o Zabb
 
 O container tem acesso aos seguintes diretórios do host para coleta de métricas:
 
+- `./zabbix_agent2.conf:/etc/zabbix/zabbix_agent2.conf:ro` - Arquivo de configuração customizado
 - `/:/hostfs:ro` - Sistema de arquivos completo (somente leitura)
 - `/var/run/docker.sock` - Socket do Docker para monitorar containers
 - `/etc:/etc:ro` - Configurações do sistema
 - `/proc:/host/proc:ro` - Informações de processos
 - `/sys:/host/sys:ro` - Informações do sistema
 - `/var/run:/var/run` - Runtime do sistema
+
+### Arquivos do Projeto
+
+- `docker-compose.yml` - Configuração do container
+- `zabbix_agent2.conf` - Configuração do Zabbix Agent 2
+- `.env.example` - Template de variáveis de ambiente
+- `.gitignore` - Arquivos ignorados pelo Git
 
 ## 🔧 Comandos Úteis
 

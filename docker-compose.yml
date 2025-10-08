@@ -20,6 +20,8 @@ services:
       ZBX_UNSAFEUSERPARAMETERS: ${ZBX_UNSAFEUSERPARAMETERS}
       ZBX_DEBUGLEVEL: ${ZBX_DEBUGLEVEL}
     volumes:
+      # Arquivo de configuração customizado
+      - ./zabbix_agent2.conf:/etc/zabbix/zabbix_agent2.conf:ro
       # Permite o agente ler informações do sistema host
       - /:/hostfs:ro
       - /var/run/docker.sock:/var/run/docker.sock
