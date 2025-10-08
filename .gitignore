@@ -1,0 +1,22 @@
+# Arquivos de ambiente
+.env
+
+# Logs
+*.log
+
+# Dados temporários
+tmp/
+temp/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos do editor
+*.swp
+*.swo
+*~
+
+# Arquivos de backup
+*.bak
+*.backup

@@ -1,0 +1,37 @@
+services:
+  zabbix-agent:
+    image: zabbix/zabbix-agent2:7.0-ubuntu
+    container_name: zabbix-agent
+    restart: unless-stopped
+    environment:
+      # Endereço do servidor Zabbix (definido no arquivo .env)
+      ZBX_SERVER_HOST: ${ZBX_SERVER_HOST}
+      ZBX_SERVER_PORT: ${ZBX_SERVER_PORT}
+
+      # Hostname que aparecerá no painel do Zabbix
+      ZBX_HOSTNAME: ${ZBX_HOSTNAME}
+      ZBX_HOSTNAMEITEM: ${ZBX_HOSTNAMEITEM}
+
+      # Coleta de métricas do próprio host Docker
+      ZBX_ACTIVE_ALLOW: ${ZBX_ACTIVE_ALLOW}
+      ZBX_PASSIVE_ALLOW: ${ZBX_PASSIVE_ALLOW}
+
+      # Para monitorar containers e o host Docker
+      ZBX_UNSAFEUSERPARAMETERS: ${ZBX_UNSAFEUSERPARAMETERS}
+      ZBX_DEBUGLEVEL: ${ZBX_DEBUGLEVEL}
+    volumes:
+      # Permite o agente ler informações do sistema host
+      - /:/hostfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc:/etc:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run:/var/run
+    ports:
+      - "${ZABBIX_AGENT_PORT}:10050"
+    networks:
+      - zabbix-agent-net
+
+networks:
+  zabbix-agent-net:
+    driver: bridge
