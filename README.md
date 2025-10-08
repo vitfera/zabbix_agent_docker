@@ -45,11 +45,12 @@ Este repositório contém uma configuração Docker Compose para executar o Zabb
 
 ### Arquivos de Configuração
 
-O projeto usa:
-- ✅ **Imagem Alpine** - Versão mais estável e leve
-- ✅ **Variáveis de ambiente nativas** - Configuração via .env
-- ✅ **Sem montagem de arquivos** - Evita problemas de permissão
-- ✅ **Compatível com qualquer servidor Zabbix** - Apenas agent, envia dados para servidor remoto
+O projeto usa um **script de inicialização customizado** que:
+- ✅ **Cria automaticamente** o arquivo `zabbix_agent2.conf`
+- ✅ **Gera arquivos de plugin** necessários 
+- ✅ **Usa variáveis de ambiente** do arquivo `.env`
+- ✅ **Resolve definitivamente** erros de configuração ausente
+- ✅ **Funciona em qualquer ambiente** Docker
 
 ### Variáveis de Ambiente
 
@@ -76,6 +77,7 @@ O container tem acesso aos seguintes diretórios do host para coleta de métrica
 ### Arquivos do Projeto
 
 - `docker-compose.yml` - Configuração do container
+- `init-zabbix.sh` - Script de inicialização que cria configuração automaticamente
 - `.env.example` - Template de variáveis de ambiente
 - `.gitignore` - Arquivos ignorados pelo Git
 

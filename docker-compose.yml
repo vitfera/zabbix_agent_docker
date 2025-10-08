@@ -3,6 +3,7 @@ services:
     image: zabbix/zabbix-agent2:alpine-${ZABBIX_AGENT_VERSION:-latest}
     container_name: zabbix-agent
     restart: unless-stopped
+    entrypoint: ["sh", "/init-zabbix.sh"]
     environment:
       # Endereço do servidor Zabbix (definido no arquivo .env)
       ZBX_SERVER_HOST: ${ZBX_SERVER_HOST}
@@ -25,6 +26,8 @@ services:
       ZBX_LOGFILE: /tmp/zabbix_agent2.log
       ZBX_LOGFILESIZE: 1
     volumes:
+      # Script de inicialização
+      - ./init-zabbix.sh:/init-zabbix.sh:ro
       # Permite o agente ler informações do sistema host
       - /:/hostfs:ro
       - /var/run/docker.sock:/var/run/docker.sock
