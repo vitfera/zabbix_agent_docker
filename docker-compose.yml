@@ -1,6 +1,6 @@
 services:
   zabbix-agent:
-    image: zabbix/zabbix-agent2:7.0-ubuntu
+    image: zabbix/zabbix-agent2:${ZABBIX_AGENT_VERSION:-latest}
     container_name: zabbix-agent
     restart: unless-stopped
     environment:
