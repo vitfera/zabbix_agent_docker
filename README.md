@@ -45,11 +45,11 @@ Este repositório contém uma configuração Docker Compose para executar o Zabb
 
 ### Arquivos de Configuração
 
-O projeto usa variáveis de ambiente para configuração, que são:
-- ✅ Suportadas nativamente pela imagem oficial
-- ✅ Flexíveis e fáceis de configurar
-- ✅ Não requerem montagem de arquivos
-- ✅ Compatíveis com diferentes versões do container
+O projeto usa:
+- ✅ **Imagem Alpine** - Versão mais estável e leve
+- ✅ **Variáveis de ambiente nativas** - Configuração via .env
+- ✅ **Sem montagem de arquivos** - Evita problemas de permissão
+- ✅ **Compatível com qualquer servidor Zabbix** - Apenas agent, envia dados para servidor remoto
 
 ### Variáveis de Ambiente
 
@@ -100,8 +100,10 @@ docker compose ps
 O Zabbix Agent 2 é responsável por:
 - Coletar métricas do sistema host
 - Monitorar containers Docker
-- Enviar dados para o servidor Zabbix
+- **Enviar dados para servidor Zabbix remoto** (não inclui servidor Zabbix)
 - Permitir execução de comandos remotos (quando configurado)
+
+> **⚠️ Importante:** Este container é APENAS o agent. Você precisa de um servidor Zabbix separado para receber os dados. Configure o IP do servidor no arquivo `.env`.
 
 ## 🔒 Segurança
 
