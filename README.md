@@ -45,26 +45,27 @@ Este repositório contém uma configuração Docker Compose para executar o Zabb
 
 ### Arquivos de Configuração
 
-O projeto inclui um arquivo de configuração customizado `zabbix_agent2.conf` que:
-- ✅ Resolve problemas de configuração ausente
-- ✅ Inclui parâmetros customizados para Docker
-- ✅ Usa variáveis de ambiente para flexibilidade
-- ✅ Configurações otimizadas para monitoramento de containers
+O projeto usa variáveis de ambiente para configuração, que são:
+- ✅ Suportadas nativamente pela imagem oficial
+- ✅ Flexíveis e fáceis de configurar
+- ✅ Não requerem montagem de arquivos
+- ✅ Compatíveis com diferentes versões do container
 
 ### Variáveis de Ambiente
 
 | Variável | Descrição | Valor Padrão |
 |----------|-----------|--------------|
+| `ZABBIX_AGENT_VERSION` | Versão da imagem Docker | `latest` |
 | `ZBX_SERVER_HOST` | IP do servidor Zabbix | `192.168.1.100` |
 | `ZBX_SERVER_PORT` | Porta do servidor Zabbix | `10051` |
 | `ZBX_HOSTNAME` | Nome do host no Zabbix | `docker-apps` |
 | `ZABBIX_AGENT_PORT` | Porta externa do agente | `10050` |
+| `ZBX_DEBUGLEVEL` | Nível de debug (0-5) | `3` |
 
 ### Volumes Montados
 
 O container tem acesso aos seguintes diretórios do host para coleta de métricas:
 
-- `./zabbix_agent2.conf:/etc/zabbix/zabbix_agent2.conf:ro` - Arquivo de configuração customizado
 - `/:/hostfs:ro` - Sistema de arquivos completo (somente leitura)
 - `/var/run/docker.sock` - Socket do Docker para monitorar containers
 - `/etc:/etc:ro` - Configurações do sistema
@@ -75,7 +76,6 @@ O container tem acesso aos seguintes diretórios do host para coleta de métrica
 ### Arquivos do Projeto
 
 - `docker-compose.yml` - Configuração do container
-- `zabbix_agent2.conf` - Configuração do Zabbix Agent 2
 - `.env.example` - Template de variáveis de ambiente
 - `.gitignore` - Arquivos ignorados pelo Git
 

@@ -19,9 +19,12 @@ services:
       # Para monitorar containers e o host Docker
       ZBX_UNSAFEUSERPARAMETERS: ${ZBX_UNSAFEUSERPARAMETERS}
       ZBX_DEBUGLEVEL: ${ZBX_DEBUGLEVEL}
+      
+      # Configurações adicionais
+      ZBX_TIMEOUT: 30
+      ZBX_LOGFILE: /tmp/zabbix_agent2.log
+      ZBX_LOGFILESIZE: 1
     volumes:
-      # Arquivo de configuração customizado
-      - ./zabbix_agent2.conf:/etc/zabbix/zabbix_agent2.conf:ro
       # Permite o agente ler informações do sistema host
       - /:/hostfs:ro
       - /var/run/docker.sock:/var/run/docker.sock
